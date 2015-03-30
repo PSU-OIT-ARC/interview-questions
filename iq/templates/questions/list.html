@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-header">
+    <h2>
+        Questions
+        <a class="btn main-button pull-right" href="{% url 'questions-create' %}">
+            Add a question
+        </a>
+    </h2>
+</div>
+
+<!-- Search and filter bar for question list
+     TODO: Fix the styling. Buttons are an eyesore -->
+<form method="get">
+
+    <div class="row">
+        <div class="col-md-3">
+            {{ form.order|bootstrap }}
+        </div>
+        <div class="col-md-7">
+            {{ form.tags|bootstrap }}
+        </div>
+        <div class="col-md-1">
+            <input
+                class="btn main-button"
+                type="submit"
+                name="submit"
+                value="Filter"/>
+        </div>
+    </div>
+
+</form>
+<hr />
+
+<!-- List of questions -->
+{% include "questions/_list.html" %}
+{% endblock %}

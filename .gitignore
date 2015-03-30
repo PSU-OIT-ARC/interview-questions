@@ -1,0 +1,10 @@
+*/settings/local.py
+*.pyc
+.env
+media/*
+tmp/*
+.coverage
+htmlcov
+/static
+variables.py
+ngrok

@@ -1,0 +1,154 @@
+body {
+    background-color:#E5E6DE;
+    background-image: url('../img/header.jpg');
+    background-repeat: repeat-x;
+}
+
+.formset-row-deleted {
+    opacity:0.2;
+    filter: alpha(opacity = 20);
+}
+
+.formset-row .form-group {
+    margin-bottom:0;
+}
+
+.radio, .checkbox {
+    margin-top:0;
+}
+
+#header {
+    padding-top:24px;
+    padding-bottom:24px;
+}
+
+#upper-info {
+    float: right;
+    color: #fff;
+    font-size: 12px;
+    padding-top:5px;
+    margin-top:-24px; /* these needs to be the negative of #header padding-top */
+}
+
+#upper-info a {
+    color:#fff;
+}
+
+#brand {
+    color:#ffffff;
+    font-size:22px;
+    margin-left:24px;
+}
+
+.navbar {
+    border-radius:0;
+    border-left:none;
+    border-right:none;
+}
+
+.navbar-default {
+    background-color: #6a7f10;
+    border-color: #B4BF88;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand {
+    color:#fff;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color:#cdcdcd;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+    background-color:#ffffff;
+    color:#6a7f10;
+}
+
+#main {
+    border-radius:6px;
+    background-color:#ffffff;
+    padding-bottom:16px;
+    padding-top:16px;
+}
+
+/* ================ IQ CUSTOM CSS =================== */
+
+/* This will need to eventually be migrated to  *
+ * .multiple-checkbox label.                    */
+#id_categories {
+    list-style-type: none;
+    list-style:none;
+    padding-left:0;
+}
+
+#id_questions {
+    list-style-type: none;
+    list-style:none;
+    padding-left:0;
+}
+
+/*----- Button colors -----
+ * Based on FlatUI Colors */
+.main-button {
+    background-color: #2C3E50;
+    color: #ECF0F1;
+}
+
+
+
+
+/*---- Category detail ----*/
+.container .row .btn-group {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    float: right;
+}
+
+.container .row .col-md-2 p {
+    float: right;
+    margin-bottom: 0px;
+}
+/*-------------------------*/
+
+.multiple-checkbox label {
+    font-weight:normal;
+}
+
+/* Adjust line spacing on buttons */
+.tag-button-list {
+    line-height: 2.42em;
+}
+
+.page-header .row .btn-group {
+    float: right;
+}
+
+.question-block {
+    overflow:hidden;
+    padding:10px;
+}
+
+#question-body {
+    padding-left:4px;
+}
+
+.question-block.open {
+    height:auto;
+    padding-bottom:0px;
+}
+
+.question-block .answer-block {
+    display:none;
+}
+
+.question-block.open .answer-block {
+    display:block;
+}
+
+.question-block.open .answer-block.well {
+    margin-top:15px;
+    margin-bottom:15px;
+    padding-bottom:30px;
+}
+
+/* ================================================== */

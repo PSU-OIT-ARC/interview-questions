@@ -1,0 +1,28 @@
+{% load markdown_filter %}
+
+<div>
+    <p>
+        Portland State University<br>
+        Academic and Research Computing<br>
+        Interview Questions
+    </p>
+    <small>ARC Internal Copy</small>
+    <hr />
+</div>
+
+<h1>{{ category.name }}</h1>
+
+<ol>
+    {% for q in questions %}
+        <li>
+            <div>
+                {{ q.body|frommarkdown }}
+            </div>
+            <div>
+                {% if q.answer %}
+                    <strong>Answer: </strong>{{ q.answer|frommarkdown }}
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+</ol>

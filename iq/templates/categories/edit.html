@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load humanize %}<!-- for fun with naturaltime -->
+{% block content %}
+
+{% if error_message %}<div class="alert alert-warning">{{ error_message}}</div>{% endif %}
+
+<div class="page-header">
+    <h2>{% if category.category_id %}{{ category.name }}{% else %}Create a new Category{% endif %}</h2>
+</div>
+
+<form action="{% if category.category_id %}{% url 'categories-edit' category.category_id %}{% else %}{% url 'categories-create' %}{% endif %}", method="post">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ form.name|bootstrap }}
+        </div>
+        <div class="col-md-3">
+            {{ form.color|bootstrap }}
+        </div>
+        <div class="col-md-3">
+            {{ form.background_color|bootstrap }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ form.description|bootstrap }}
+        </div>
+    </div>
+
+    <input class="btn btn-lg main-button pull-right" type="submit" value="Submit" />
+</form>
+
+{% endblock %}
