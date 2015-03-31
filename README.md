@@ -11,14 +11,14 @@ for you
 ## Installation
 
 Simply clone the repository
-    git clone https://github.com/PSU-OIT-ARC/interview-questions.git
+`git clone https://github.com/PSU-OIT-ARC/interview-questions.git`
 
 Set up a virtual environment (For development)
-    virtualenv --no-site-packages -p python3 .env
-    source .env/bin/activate
+`virtualenv --no-site-packages -p python3 .env`
+`source .env/bin/activate`
 
 Run the initial project setup via Makefile
-    make install
+`make install`
 
 Run the server, and you are done!
-    make
+`make`
