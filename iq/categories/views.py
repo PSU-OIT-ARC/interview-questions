@@ -7,7 +7,6 @@ from iq.questions.models import Question, CategoryQuestion
 from .forms import CategoryForm
 from .models import Category
 
-
 def list_(request):
     """
     Lists all categories, starting with the most
@@ -18,7 +17,6 @@ def list_(request):
     return render(request, "categories/list.html", {
         "categories": categories,
     })
-
 
 def detail(request, category_id):
     """
@@ -34,7 +32,6 @@ def detail(request, category_id):
         "questions": questions,
     })
 
-
 def printout(request, category_id):
     """
     References a raw HTML page suitable for printing
@@ -47,7 +44,6 @@ def printout(request, category_id):
         "category": cat,
         "questions": questions,
     })
-
 
 def printout_applicant(request, category_id):
     """
@@ -62,20 +58,17 @@ def printout_applicant(request, category_id):
         "questions": questions,
     })
 
-
 def create(request):
     """
     Create a single category
     """
     return _edit(request, category_id=None)
 
-
 def edit(request, category_id):
     """
     Edit an existing category
     """
     return _edit(request, category_id)
-
 
 def _edit(request, category_id):
     """
@@ -87,7 +80,10 @@ def _edit(request, category_id):
         category = get_object_or_404(Category, pk=category_id)
 
     if request.POST:
-        form = CategoryForm(request.POST, instance=category, created_by=request.user)
+        if request.user.is_authenticated() == True:
+            form = CategoryForm(request.POST, instance=category, created_by=request.user)
+        else:
+            form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
             if category_id:
@@ -103,7 +99,6 @@ def _edit(request, category_id):
         "category": category,
         "form": form,
     })
-
 
 def delete(request, category_id):
     """

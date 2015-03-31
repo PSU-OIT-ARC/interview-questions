@@ -10,7 +10,7 @@ class Question(models.Model):
     body = models.TextField()
     answer = models.TextField()
     difficulty = models.IntegerField(default=None, null=True)
-    created_by = models.ForeignKey('auth.User', null=True, on_delete=models.SET_NULL)
+    created_by = models.ForeignKey('auth.User', null=True, blank=True, on_delete=models.SET_NULL)
     created_on = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField('tags.Tag')
 
@@ -30,7 +30,7 @@ class CategoryQuestion(models.Model):
     category_question_id = models.AutoField(primary_key=True)
     question = models.ForeignKey('questions.Question')
     category = models.ForeignKey('categories.Category')
-    created_by = models.ForeignKey('auth.User', null=True, on_delete=models.SET_NULL)
+    created_by = models.ForeignKey('auth.User', null=True, blank=True, on_delete=models.SET_NULL)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

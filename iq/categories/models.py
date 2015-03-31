@@ -20,7 +20,7 @@ class Category(models.Model):
     description = models.TextField()
     color = models.CharField(max_length=16)
     background_color = models.CharField(max_length=16)
-    created_by = models.ForeignKey('auth.User', null=True, on_delete=models.SET_NULL)
+    created_by = models.ForeignKey('auth.User', null=True, blank=True, on_delete=models.SET_NULL)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
