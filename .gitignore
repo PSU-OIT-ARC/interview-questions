@@ -1,3 +1,4 @@
+variables.py
 */settings/local.py
 *.pyc
 .env
@@ -6,5 +7,4 @@ tmp/*
 .coverage
 htmlcov
 /static
-variables.py
 ngrok
