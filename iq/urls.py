@@ -38,6 +38,13 @@ urlpatterns = patterns('',
     url(r'^categories/printout/(?P<category_id>\d+)/?$', categories.printout, name='categories-printout'),
     url(r'^categories/printout_applicant/(?P<category_id>\d+)/?$', categories.printout_applicant, name='categories-printout_applicant'),
 
+    # Tags
+    url(r'^tags/?$', tags.to_json, name="tags-json"),
+
+    # Elasticsearch
+    #url(r'^elasticsearch/index/(?P<question_id>\d+)/?$', questions.esIndex, name='questions-esindex'),
+    #url(r'^elasticsearch/retrieve/(?P<question_id>\d+)/?$', questions.esRetrieve, name='questions-esretrieve'),
+
     # Standard
     url(r'', include('django.contrib.auth.urls')),
     url(r'^cloak/', include('cloak.urls'))
