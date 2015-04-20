@@ -91,6 +91,7 @@ INSTALLED_APPS = (
     'iq.questions',
     'iq.tags',
     'iq.permissions',
+    'iq.utils',
 )
 
 MIDDLEWARE_CLASSES = (
