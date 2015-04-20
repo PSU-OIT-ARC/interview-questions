@@ -68,20 +68,13 @@ class IPList(list):
 
 INTERNAL_IPS = IPList(['10.*', '192.168.*'])
 
-
 # [CAS Settings]
-
-CAS_SERVER_URL = 'https://sso.pdx.edu/cas/login'
-CAS_ADMIN_PREFIX = '/admin/'
-CAS_IGNORE_REFERER = True
-CAS_REDIRECT_URL = '/questions/list'
-
-CAS_AUTO_CREATE_USERS = True
-#CAS_RETRY_LOGIN = False
-
 # for django-cas to work, it needs HttpRequest.get_host(), which requires this setting
 # https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['.pdx.edu']
+CAS_SERVER_URL = 'https://sso.pdx.edu/cas/login'
+CAS_ADMIN_PREFIX = '/admin/'
+CAS_AUTO_CREATE_USERS = True
 
 
 INSTALLED_APPS = (
