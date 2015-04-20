@@ -11,11 +11,8 @@
     </h2>
 </div>
 
-<!-- Search and filter bar for question list
-     TODO: Fix the styling. Buttons are an eyesore -->
-<form method="get">
-
-    <div class="row">
+<div class="row">
+    <form action="" method="get">
         <div class="col-md-3">
             {{ form.order|bootstrap }}
         </div>
@@ -26,12 +23,11 @@
             <input
                 class="btn main-button"
                 type="submit"
-                name="submit"
                 value="Filter"/>
         </div>
-    </div>
+    </form>
+</div>
 
-</form>
 <hr />
 
 <!-- List of questions -->

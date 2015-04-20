@@ -24,7 +24,6 @@ urlpatterns = patterns('',
 
     # Questions
     url(r'^questions/list/?$', questions.list_, name='questions-list'),
-    #url(r'^questions/detail/(?P<question_id>\d+)/?$', questions.detail, name='questions-detail'),
     url(r'^questions/edit/(?P<question_id>\d+)/?$', questions.edit, name='questions-edit'),
     url(r'^questions/create/?$', questions.create, name='questions-create'),
     url(r'^questions/delete/(?P<question_id>\d+)/?$', questions.delete, name='questions-delete'),

@@ -5,7 +5,6 @@ class Question(models.Model):
     Question object with text, answer, author, and associated
     tags
     """
-
     question_id = models.AutoField(primary_key=True)
     body = models.TextField()
     answer = models.TextField()
@@ -26,7 +25,6 @@ class CategoryQuestion(models.Model):
     Category / Question Intermediate Class;
     Uniquely maps Categories -> Questions [Many-to-many relationship]
     """
-
     category_question_id = models.AutoField(primary_key=True)
     question = models.ForeignKey('questions.Question')
     category = models.ForeignKey('categories.Category')
