@@ -24,7 +24,6 @@ TEMPLATE_DEBUG = DEBUG
 
 
 # [LDAP Settings]
-
 # if you're having trouble connecting to LDAP set this to True so you can login
 # to track, bypassing LDAP group checks
 LDAP_DISABLED = variable("LDAP_DISABLED", default=False)
@@ -41,9 +40,7 @@ LDAP = {
 ADMINS = variable("ADMINS", [])
 MANAGERS = ADMINS
 
-
 # [MYSQL Settings]
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -54,8 +51,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-
-#AUTH_USER_MODEL = 'django.contrib.auth.models.User'
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
@@ -114,23 +109,19 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'djangocas.middleware.CASMiddleware',
-#    'django.middleware.doc.XViewMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'iq.backends.PSUBackend',
-#    'djangocas.backends.CASBackend',
 )
 
 ROOT_URLCONF = 'iq.urls'
 
 WSGI_APPLICATION = 'iq.wsgi.application'
 
-
-# Internationalization
+# [Internationalization]
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'America/Los_Angeles'
@@ -141,10 +132,8 @@ USE_L10N = False
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
+# [Static files]
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-
 STATIC_URL = '/static/'
 
 STATIC_ROOT = ROOT("static")
@@ -173,8 +162,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    #here('../', "templates"),
-    ROOT("iq", "templates"),
+    here("templates"),
+    #ROOT("iq", "templates"),
 )
 
 SECRET_KEY = variable("SECRET_KEY", default=os.urandom(64).decode("latin1"))
