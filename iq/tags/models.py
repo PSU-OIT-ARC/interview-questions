@@ -3,18 +3,17 @@ import string
 from django.db import models
 
 class Tag(models.Model):
-    # Based on FlatUI
-    BLACK = '#000000'      # Basic shade
-    WHITE = '#ecf0f1'      # Light grey
-    BLUE = '#3498db'       # Contrast: White
-    GREEN = '#2ecc71'      # Contrast: White
-    TURQUOISE = '#1abc9c'  # Contrast: White
-    YELLOW = '#f1c40f'     # Contrast: White
-    RED = '#e74c3c'        # Contrast: White
-    PURPLE = '#9b59b6'     # Contrast: White
+    BLACK = '#000000'
+    WHITE = '#ecf0f1'
+
+    BLUE = '#428bca'
+    GREEN = '#5cb85c'
+    YELLOW = '#f0ad4e'
+    RED = '#d9534f'
+    CYAN = '#5bc0de'
 
     tag_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     color = models.CharField(max_length=16)
     background_color = models.CharField(max_length=16)
 
@@ -33,10 +32,8 @@ class Tag(models.Model):
         COLOR_COMBINATIONS = (
             (Tag.WHITE , Tag.BLUE),
             (Tag.WHITE , Tag.GREEN),
-            (Tag.WHITE , Tag.TURQUOISE),
             (Tag.WHITE , Tag.YELLOW),
             (Tag.WHITE , Tag.RED),
-            (Tag.WHITE , Tag.PURPLE),
+            (Tag.WHITE , Tag.CYAN),
         )
-
         return random.choice(COLOR_COMBINATIONS)
