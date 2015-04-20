@@ -2,42 +2,50 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 {% if question_list.count == 0 %}
-    <div class="alert alert-warning">No questions are available</div>
-{% else %}
-    <ul class="list-group">
-        {% for q in question_list %}
-            <li class="question-block list-group-item" onclick="$(this).toggleClass('open');">
-                <span>
-                    <div class="pull-right tag-block">
-                        <!-- This definitely needs refactoring -->
-                        {% if q.tags.all.first.name != "" %}
-                            {% for t in q.tags.all %}
-                            <button class="btn btn-xs"
-                                    style="color: {{ t.color }}; background-color: {{ t.background_color }}; border-radius: 10px;"
-                                    type="button"
-                                    role="button">
-                                    {{ t.name }}
-                                </button>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div id="question-body">
-                        {{ q.body }}
-                    </div>
-                </span>
+<div class="alert alert-warning">
+    No questions are available
+</div>
 
-                <div class="answer-block well">
-                    <div>
-                        <strong>Answer:</strong> {{ q.answer }}
-                        <br />
-                    </div>
-                    <div class="question-metadata pull-right">
-                        <strong>Difficulty: </strong>{{ q.difficulty }} | <strong>Created:</strong> {{ q.created_on|naturaltime }} | {% if q.created_by %}<Strong>Author:</strong> {{ q.created_by }}{% endif %}
-                        <a href="{% url 'questions-edit' q.pk %}{% if category %}?category_id={{ category.pk }}{% endif %}" class="glyphicon glyphicon-pencil"></a>
-                        <a href="{% url 'questions-delete' q.pk %}{% if category %}?category_id={{ category.pk }}{% endif %}" class="glyphicon glyphicon-remove"></a>
+{% else %}
+<ul class="list-group">
+    {% for q in question_list %}
+        <li class="question-block list-group-item" onclick="$(this).toggleClass('open');">
+            <span>
+                <div class="pull-right tag-block">
+                    <!-- This might need refactoring -->
+                    {% if q.tags.all.first.name != "" %}
+                        {% for t in q.tags.all %}
+                        <button class="btn btn-xs"
+                                style="color: {{ t.color }}; background-color: {{ t.background_color }}; border-radius: 10px;"
+                                type="button"
+                                role="button">
+                                {{ t.name }}
+                            </button>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div id="question-body">
+                    {{ q.body }}
+                </div>
+            </span>
+
+            <div class="answer-block well">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p><strong>Answer:</strong> {{ q.answer }}</p>
                     </div>
                 </div>
-            </li>
-        {% endfor %}
-    </ul>
+                <div class="row">
+                    <div class="question-metadata col-sm-8 pull-right">
+                        <p class="pull-right">
+                            <strong>Difficulty: </strong>{{ q.difficulty }} | <strong>Created:</strong> {{ q.created_on|naturaltime }} | {% if q.created_by %}<Strong>Author:</strong> {{ q.created_by }} | {% endif %}
+                            <a href="{% url 'questions-edit' q.pk %}{% if category %}?category_id={{ category.pk }}{% endif %}" class="btn btn-xs main-button">Edit</a>
+                            <a href="{% url 'questions-delete' q.pk %}{% if category %}?category_id={{ category.pk }}{% endif %}" class="btn btn-xs main-button">Delete</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
 {% endif %}
