@@ -9,12 +9,17 @@
 {% endif %}
 
 <div class="page-header">
-    <h2>{% if question.question_id %}{{ question.body }}{% else %}Create a new Question{% endif %}</h2>
+    <h2>
+        {% if question.question_id %}
+            {{ question.body }}
+        {% else %}
+            Create a new Question
+        {% endif %}
+    </h2>
 </div>
 
 <form action="" method="POST">
     {% csrf_token %}
-
     <div class="row">
         <div class="col-md-6">
             {{ form.body|bootstrap }}
