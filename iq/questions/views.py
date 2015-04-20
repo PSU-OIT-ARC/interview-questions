@@ -103,12 +103,12 @@ def edit(request, question_id):
 def _edit(request, question_id):
     """
     Edit a single question and it's attributes
-    Some serious voodoo witchcraft tom-foolery going on here
     """
     category_id = request.GET.get("category_id", None)
 
     if question_id is None:
         question = None
+        tags = None
     else:
         question = get_object_or_404(Question, pk=question_id)
         question.created_on=timezone.now()
@@ -116,12 +116,14 @@ def _edit(request, question_id):
 
     if request.POST:
         if request.user.is_authenticated() == True:
-            form = QuestionForm(request.POST, instance=question, created_by=request.user)
-        else:
-            form = QuestionForm(request.POST, instance=question)
+            form = QuestionForm(
+                    request.POST,
+                    instance=question,
+                    created_by=request.user
+            )
+
         if form.is_valid():
             form.save()
-            # Determine which message to display & where to redirect the user
             if category_id:
                 if question_id:
                     messages.success(request, "Question was successfully edited.")
@@ -139,12 +141,16 @@ def _edit(request, question_id):
     else:
         form = QuestionForm(instance=question, category_id=category_id)
 
+    tags = json.dumps([str(tag) for tag in Tag.objects.all()])
+
     return render(request, "questions/edit.html", {
-        "question": question,
         "form": form,
+        "tags": tags,
+        "question": question,
         "category_id": category_id,
     })
 
+@login_required
 def delete(request, question_id):
     """
     Deletes a single question from the list
