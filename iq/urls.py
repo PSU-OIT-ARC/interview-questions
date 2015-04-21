@@ -3,7 +3,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf import settings
 
-from .views import home
 from .questions import views as questions
 from .categories import views as categories
 from .tags import views as tags
