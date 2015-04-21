@@ -31,6 +31,7 @@ class QuestionModelsTest(IqCustomTest):
         )
         q.save()
         self.assertTrue(q)
+        self.assertEqual(q.body, q.__str__())
 
     def test_categoryquestion_model(self):
         self.question = make(Question)
@@ -43,6 +44,7 @@ class QuestionModelsTest(IqCustomTest):
         cq.save()
         self.assertEqual(cq.question.pk, self.question.pk)
         self.assertEqual(cq.category.pk, self.category.pk)
+        self.assertEqual(cq.question.body, cq.__str__())
 
 
 class QuestionFormsTest(IqCustomTest):

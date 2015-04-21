@@ -32,7 +32,7 @@ class CategoryQuestion(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.body
+        return self.question.body
 
     class Meta:
         db_table = "category_question_id"
