@@ -82,8 +82,6 @@ def _edit(request, category_id):
     if request.POST:
         if request.user.is_authenticated() == True:
             form = CategoryForm(request.POST, instance=category, created_by=request.user)
-        else:
-            form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
             if category_id:

@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% if error_message %}<div class="alert alert-warning">{{ error_message}}</div>{% endif %}
+{% if error_message %}
+    <div class="alert alert-warning">
+        {{ error_message}}
+    </div>
+{% endif %}
 
 <div class="alert alert-danger">
     <h3>Are you sure you want to delete this question?</h3>

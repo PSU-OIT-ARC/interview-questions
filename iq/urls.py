@@ -3,7 +3,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf import settings
 
-from .views import home
 from .questions import views as questions
 from .categories import views as categories
 from .tags import views as tags
@@ -24,7 +23,6 @@ urlpatterns = patterns('',
 
     # Questions
     url(r'^questions/list/?$', questions.list_, name='questions-list'),
-    #url(r'^questions/detail/(?P<question_id>\d+)/?$', questions.detail, name='questions-detail'),
     url(r'^questions/edit/(?P<question_id>\d+)/?$', questions.edit, name='questions-edit'),
     url(r'^questions/create/?$', questions.create, name='questions-create'),
     url(r'^questions/delete/(?P<question_id>\d+)/?$', questions.delete, name='questions-delete'),
@@ -37,6 +35,13 @@ urlpatterns = patterns('',
     url(r'^categories/delete/(?P<category_id>\d+)/?$', categories.delete, name='categories-delete'),
     url(r'^categories/printout/(?P<category_id>\d+)/?$', categories.printout, name='categories-printout'),
     url(r'^categories/printout_applicant/(?P<category_id>\d+)/?$', categories.printout_applicant, name='categories-printout_applicant'),
+
+    # Tags
+    #url(r'^tags/?$', tags.to_json, name="tags-json"),
+
+    # Elasticsearch
+    #url(r'^elasticsearch/index/(?P<question_id>\d+)/?$', questions.esIndex, name='questions-esindex'),
+    #url(r'^elasticsearch/retrieve/(?P<question_id>\d+)/?$', questions.esRetrieve, name='questions-esretrieve'),
 
     # Standard
     url(r'', include('django.contrib.auth.urls')),

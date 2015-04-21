@@ -4,16 +4,19 @@
 
 {% if error_message %}<div class="alert alert-warning">{{ error_message}}</div>{% endif %}
 
+<div class="page-header" id="category-detail-page-header">
+    <!-- Primary header for category detail-->
     <div class="row">
         <div class="col-md-7">
-            <h2>{{ category.name }}</h2>
+            <h2>
+                {{ category.name }}
+                <small>
+                    {{ category.description }}
+                </small>
+            </h2>
         </div>
-        <!--div class="col-md-2">
-            <a href="{% url 'categories-edit' category.category_id %}"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a href="{% url 'categories-delete' category.category_id %}"><span class="glyphicon glyphicon-remove"></span></a>
-        </div-->
         <div class="col-md-5">
-            <div class="btn-group" role="group" >
+            <div class="btn-group" id="print-view-buttons" role="group" >
                 <a class="btn main-button" href="{% url "questions-create" %}?category_id={{ category.pk }}">Append a question</a>
                 <a class="btn main-button" href="{% url 'categories-printout' category.category_id %}">ARC Staff Copy</a>
                 <a class="btn main-button" href="{% url 'categories-printout_applicant' category.category_id %}">Applicant Copy</a>
@@ -21,20 +24,23 @@
         </div>
     </div>
 
+    <!-- Secondary header for category detail-->
     <div class="row">
-        <div class="col-md-10">
-            <p class="text-muted">
-                {{ category.description }}
+        <div class="col-md-6">
+            <p>
+                <a href="{% url 'categories-edit' category.category_id %}" class="btn btn-xs main-button">Edit</a>
+                <a href="{% url 'categories-delete' category.category_id %}" class="btn btn-xs main-button">Delete</a>
             </p>
         </div>
-        <div class="col-md-2">
-            <p>
+        <div class="col-md-6">
+            <p id="category-author">
                 {% if category.created_by %}
                     <strong>Author:</strong> {{ category.created_by }}
                 {% endif %}
             </p>
         </div>
     </div>
+</div>
 
 {% if questions %}
     {% include "questions/_list.html" with question_list=questions category=category %}

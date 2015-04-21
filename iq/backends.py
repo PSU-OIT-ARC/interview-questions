@@ -8,8 +8,6 @@ from django.core.exceptions import PermissionDenied
 from .permissions import LOGIN_GROUPS
 
 
-# Taken from TRAQ
-# Authors: MJ, Thom, KFarr
 class PSUBackend(CASBackend):
     """
     PSU/CAS Authentication Backend with user data populated from AD

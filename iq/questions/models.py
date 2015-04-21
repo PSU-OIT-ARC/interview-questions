@@ -5,7 +5,6 @@ class Question(models.Model):
     Question object with text, answer, author, and associated
     tags
     """
-
     question_id = models.AutoField(primary_key=True)
     body = models.TextField()
     answer = models.TextField()
@@ -26,7 +25,6 @@ class CategoryQuestion(models.Model):
     Category / Question Intermediate Class;
     Uniquely maps Categories -> Questions [Many-to-many relationship]
     """
-
     category_question_id = models.AutoField(primary_key=True)
     question = models.ForeignKey('questions.Question')
     category = models.ForeignKey('categories.Category')
@@ -34,7 +32,7 @@ class CategoryQuestion(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.body
+        return self.question.body
 
     class Meta:
         db_table = "category_question_id"
