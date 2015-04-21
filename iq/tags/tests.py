@@ -29,13 +29,13 @@ class TagModelsTest(IqCustomTest):
         self.assertEqual(t.name, t.__str__())
 
 
-class TagViewsTest(IqCustomTest):
-    """
-    Tests view calls for Tag app
-    """
-    def setUp(self):
-        super(TagModelsTest, self).setUp()
-
+#class TagViewsTest(IqCustomTest):
+#    """
+#    Tests view calls for Tag app
+#    """
+#    def setUp(self):
+#        super(TagModelsTest, self).setUp()
+#
 #    def test_valid_to_json(self):
 #        """
 #        Ensures the appropriate tag data is instantiated into a json object
