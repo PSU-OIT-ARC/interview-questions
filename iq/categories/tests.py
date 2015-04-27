@@ -39,13 +39,14 @@ class CategoryFormsTest(IqCustomTest):
 
     def test_valid_category_form(self):
         form = CategoryForm(created_by=self.user, data={
-            "name": "foo",
-            "description": "bar"
+            "name": "Valid Category",
+            "description": "is a new category",
         })
-        form.is_valid()
-        count = Category.objects.count()
-        form.save()
-        self.assertEqual(count+1, Category.objects.count())
+        self.assertTrue(form.is_valid())
+        new_category = form.save()
+        self.assertEqual(new_category.created_by, self.user)
+        self.assertEqual(form.fields["name"].label, "Category Name")
+        self.assertFalse(form.fields["description"].required)
 
 
 class CategoryViewsTest(IqCustomTest):
