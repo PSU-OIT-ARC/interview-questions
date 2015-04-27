@@ -86,11 +86,11 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     'arcutils',
+    'iq',
     'iq.categories',
     'iq.categories.templatetags',
     'iq.questions',
     'iq.tags',
-    'iq.permissions',
     'iq.utils',
 )
 
