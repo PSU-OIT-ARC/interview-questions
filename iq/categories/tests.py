@@ -52,8 +52,6 @@ class CategoryViewsTest(IqCustomTest):
     def setUp(self):
         super(CategoryViewsTest, self).setUp()
         self.client.login(username=self.user.username, password="foo")
-        self.question = make(Question)
-        make(CategoryQuestion, question=self.question, category=self.category)
 
     def test_valid_list_get_view(self):
         response = self.client.get(reverse('categories-list'))

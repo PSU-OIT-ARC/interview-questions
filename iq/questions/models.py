@@ -2,8 +2,7 @@ from django.db import models
 
 class Question(models.Model):
     """
-    Question object with text, answer, author, and associated
-    tags
+    Question object with text, answer, author, and associated tags
     """
     question_id = models.AutoField(primary_key=True)
     body = models.TextField()
@@ -22,8 +21,7 @@ class Question(models.Model):
 
 class CategoryQuestion(models.Model):
     """
-    Category / Question Intermediate Class;
-    Uniquely maps Categories -> Questions [Many-to-many relationship]
+    Category / Question Intermediate Class
     """
     category_question_id = models.AutoField(primary_key=True)
     question = models.ForeignKey('questions.Question')
