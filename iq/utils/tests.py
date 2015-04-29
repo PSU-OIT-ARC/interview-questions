@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
+from model_mommy.mommy import make
 from iq.questions.models import Question, CategoryQuestion
 from iq.categories.models import Category
 from iq.tags.models import Tag
@@ -22,12 +23,5 @@ class IqCustomTest(TestCase):
         u.set_password('foo')
         u.save()
         self.user = u
-
-        c = Category (
-            name = "Foo",
-            description = "Something something",
-            created_on = timezone.now(),
-            created_by = self.user
-        )
-        c.save()
-        self.category = c
+        self.category = make(Category)
+        self.question = make(Question)
