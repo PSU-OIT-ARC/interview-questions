@@ -1,3 +1,4 @@
+import sys
 import os
 from fnmatch import fnmatch
 from django.conf import global_settings
@@ -161,3 +162,6 @@ TEMPLATE_DIRS = (
 )
 
 SECRET_KEY = variable("SECRET_KEY", default=os.urandom(64).decode("latin1"))
+
+if 'test' in sys.argv:
+    PASSWORD_HASHERS = ['django.contrib.auth.hashers.MD5PasswordHasher']
