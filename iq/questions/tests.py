@@ -69,6 +69,22 @@ class QuestionFormsTest(IqCustomTest):
             CategoryQuestion.objects.get(question=saved_question)
         )
 
+    def test_valid_question_form_with_existing_category(self):
+        q = make(Question)
+        c = make(Category)
+        make(CategoryQuestion, question=q, category=c)
+        form = QuestionForm(instance=q, category_id=c.pk, data={
+            "body": "bar",
+            "categories": [self.category.pk] # Assign new category
+        })
+        self.assertTrue(form.is_valid())
+        saved_question = form.save()
+        self.assertEqual(
+            CategoryQuestion.objects.get(category=self.category),
+            CategoryQuestion.objects.get(question=saved_question)
+        )
+
+
     def test_invalid_question_form(self):
         form = QuestionForm(data={
             "body": "bad",
