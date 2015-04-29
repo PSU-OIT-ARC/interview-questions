@@ -69,14 +69,18 @@ class QuestionFormsTest(IqCustomTest):
         self.assertEqual(count+1, Question.objects.count())
 
     def test_valid_question_form_with_category(self):
-        count = Question.objects.count()
-        question = make(Question)
-        form = QuestionForm(category_id=self.category.pk, instance=question, data={
+        q = make(Question)
+        c = make(Category)
+        form = QuestionForm(instance=q, data={
             "body": "foo",
+            "categories": [c.pk]
         })
         self.assertTrue(form.is_valid())
-        form.save()
-        self.assertEqual(count+1, Question.objects.count())
+        saved_question = form.save()
+        self.assertEqual(
+            CategoryQuestion.objects.get(category=c),
+            CategoryQuestion.objects.get(question=saved_question)
+        )
 
     def test_invalid_question_form(self):
         form = QuestionForm(data={
