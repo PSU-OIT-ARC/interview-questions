@@ -20,12 +20,8 @@ class CategoryModelsTest(IqCustomTest):
         super(CategoryModelsTest, self).setUp()
 
     def test_category_model(self):
-        c = Category (
-            name = "testing category model name",
-            description = "testing category model description"
-        )
-        c.save()
-        self.assertTrue(c)
+        c = make(Category)
+        self.assertEquals(c.name, c.__str__())
 
 
 class CategoryFormsTest(IqCustomTest):
@@ -35,7 +31,6 @@ class CategoryFormsTest(IqCustomTest):
     """
     def setUp(self):
         super(CategoryFormsTest, self).setUp()
-        self.client.login(username=self.user.username, password="foo")
 
     def test_valid_category_form(self):
         form = CategoryForm(created_by=self.user, data={
