@@ -1,4 +1,5 @@
 from django.db import models
+from iq.questions.indexes import QuestionIndex
 
 class Question(models.Model):
     """
@@ -11,6 +12,9 @@ class Question(models.Model):
     created_by = models.ForeignKey('auth.User', null=True, blank=True, on_delete=models.SET_NULL)
     created_on = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField('tags.Tag')
+
+    # Elasticmodels search attribute
+    search = QuestionIndex()
 
     def __str__(self):
         return self.body

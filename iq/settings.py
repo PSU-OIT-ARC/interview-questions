@@ -53,6 +53,17 @@ DATABASES = {
     }
 }
 
+
+# [Elasticmodels settings]
+# docs / project: https://github.com/PSU-OIT-ARC/elasticmodels
+ELASTICSEARCH_CONNECTIONS = {
+    'default': {
+        'HOSTS': ['http://localhost:9200',],
+        'INDEX_NAME': 'questions',
+    }
+}
+
+
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
@@ -87,6 +98,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     'arcutils',
+    'elasticmodels',
     'iq',
     'iq.categories',
     'iq.categories.templatetags',
