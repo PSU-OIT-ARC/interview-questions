@@ -108,17 +108,16 @@ class QuestionForm(forms.ModelForm):
         tag and category associations
         """
         question = super(QuestionForm, self).save(*args, **kwargs)
-        cats = []
-        CategoryQuestion.objects.filter(question=self.instance).delete()
-        for category in self.cleaned_data['categories']:
-            cats.append(CategoryQuestion(category=category, question=self.instance))
-        CategoryQuestion.objects.bulk_create(cats)
 
-        # Retrieve tags, clear existing data
+        # Delete CQs, reassign them so we don't get duplicate entries
+        CategoryQuestion.objects.filter(question=self.instance).delete()
+        for cat in self.cleaned_data['categories']:
+            CategoryQuestion.objects.create(category=cat, question=self.instance)
+
+        # 1. Retrieve tags, clear existing data
+        # 2. Create new tags list from cleaned data (clean_tags)
         tags = self.cleaned_data['tags']
         question.tags.clear()
-
-        # Create new tags list from cleaned data (clean_tags)
         for tag in tags:
             try:
                 tag = Tag.objects.get(name=tag)

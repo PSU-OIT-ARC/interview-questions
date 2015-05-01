@@ -117,9 +117,9 @@ def _edit(request, question_id):
     if request.POST:
         if request.user.is_authenticated() == True:
             form = QuestionForm(
-                    request.POST,
-                    instance=question,
-                    created_by=request.user
+                request.POST,
+                instance=question,
+                created_by=request.user
             )
 
         if form.is_valid():

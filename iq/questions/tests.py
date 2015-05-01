@@ -22,28 +22,16 @@ class QuestionModelsTest(IqCustomTest):
         super(QuestionModelsTest, self).setUp()
 
     def test_question_model(self):
-        q = Question (
-            body = "testing question model body",
-            answer = "testing question model answer",
-            difficulty = 1,
-            created_on = timezone.now(),
-            created_by = self.user,
-        )
-        q.save()
+        q = make(Question)
         self.assertTrue(q)
         self.assertEqual(q.body, q.__str__())
 
     def test_categoryquestion_model(self):
-        self.question = make(Question)
-        cq = CategoryQuestion (
-            question = self.question,
-            category = self.category,
-            created_on = timezone.now(),
-            created_by = self.user,
-        )
-        cq.save()
-        self.assertEqual(cq.question.pk, self.question.pk)
-        self.assertEqual(cq.category.pk, self.category.pk)
+        q = make(Question)
+        c = make(Category)
+        cq = make(CategoryQuestion, question=q, category=c)
+        self.assertEqual(cq.question.pk, q.pk)
+        self.assertEqual(cq.category.pk, c.pk)
         self.assertEqual(cq.question.body, cq.__str__())
 
 
@@ -54,7 +42,6 @@ class QuestionFormsTest(IqCustomTest):
     """
     def setUp(self):
         super(QuestionFormsTest, self).setUp()
-        self.client.login(username=self.user.username, password="foo")
 
     def test_valid_question_form(self):
         form = QuestionForm(created_by=self.user, data={
@@ -63,20 +50,40 @@ class QuestionFormsTest(IqCustomTest):
             "difficulty": "5",
             "tags": "asdf,fdsa,asdfasdf"
         })
-        form.is_valid()
+        self.assertTrue(form.is_valid())
         count = Question.objects.count()
         form.save()
         self.assertEqual(count+1, Question.objects.count())
 
-    def test_valid_question_form_with_category(self):
-        count = Question.objects.count()
-        question = make(Question)
-        form = QuestionForm(category_id=self.category.pk, instance=question, data={
+    def test_valid_question_form_with_new_category(self):
+        q = make(Question)
+        c = make(Category)
+        form = QuestionForm(instance=q, data={
             "body": "foo",
+            "categories": [c.pk] # Assign new category
         })
         self.assertTrue(form.is_valid())
-        form.save()
-        self.assertEqual(count+1, Question.objects.count())
+        saved_question = form.save()
+        self.assertEqual(
+            CategoryQuestion.objects.get(category=c),
+            CategoryQuestion.objects.get(question=saved_question)
+        )
+
+    def test_valid_question_form_with_existing_category(self):
+        q = make(Question)
+        c = make(Category)
+        make(CategoryQuestion, question=q, category=c)
+        form = QuestionForm(instance=q, category_id=c.pk, data={
+            "body": "bar",
+            "categories": [self.category.pk] # Assign new category
+        })
+        self.assertTrue(form.is_valid())
+        saved_question = form.save()
+        self.assertEqual(
+            CategoryQuestion.objects.get(category=self.category),
+            CategoryQuestion.objects.get(question=saved_question)
+        )
+
 
     def test_invalid_question_form(self):
         form = QuestionForm(data={
@@ -118,7 +125,7 @@ class QuestionViewsTest(IqCustomTest):
     def setUp(self):
         super(QuestionViewsTest, self).setUp()
         self.client.login(username=self.user.username, password="foo")
-        self.question = make(Question)
+        make(CategoryQuestion, question=self.question, category=self.category)
 
     def test_valid_list_get_view(self):
         response = self.client.get(reverse('questions-list')

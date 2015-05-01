@@ -20,12 +20,8 @@ class CategoryModelsTest(IqCustomTest):
         super(CategoryModelsTest, self).setUp()
 
     def test_category_model(self):
-        c = Category (
-            name = "testing category model name",
-            description = "testing category model description"
-        )
-        c.save()
-        self.assertTrue(c)
+        c = make(Category)
+        self.assertEquals(c.name, c.__str__())
 
 
 class CategoryFormsTest(IqCustomTest):
@@ -35,17 +31,17 @@ class CategoryFormsTest(IqCustomTest):
     """
     def setUp(self):
         super(CategoryFormsTest, self).setUp()
-        self.client.login(username=self.user.username, password="foo")
 
     def test_valid_category_form(self):
         form = CategoryForm(created_by=self.user, data={
-            "name": "foo",
-            "description": "bar"
+            "name": "Valid Category",
+            "description": "is a new category",
         })
-        form.is_valid()
-        count = Category.objects.count()
-        form.save()
-        self.assertEqual(count+1, Category.objects.count())
+        self.assertTrue(form.is_valid())
+        new_category = form.save()
+        self.assertEqual(new_category.created_by, self.user)
+        self.assertEqual(form.fields["name"].label, "Category Name")
+        self.assertFalse(form.fields["description"].required)
 
 
 class CategoryViewsTest(IqCustomTest):
@@ -56,8 +52,6 @@ class CategoryViewsTest(IqCustomTest):
     def setUp(self):
         super(CategoryViewsTest, self).setUp()
         self.client.login(username=self.user.username, password="foo")
-        self.question = make(Question)
-        make(CategoryQuestion, question=self.question, category=self.category)
 
     def test_valid_list_get_view(self):
         response = self.client.get(reverse('categories-list'))

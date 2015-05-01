@@ -1,3 +1,4 @@
+import sys
 import os
 from fnmatch import fnmatch
 from django.conf import global_settings
@@ -52,6 +53,17 @@ DATABASES = {
     }
 }
 
+
+# [Elasticmodels settings]
+# docs / project: https://github.com/PSU-OIT-ARC/elasticmodels
+ELASTICSEARCH_CONNECTIONS = {
+    'default': {
+        'HOSTS': ['http://localhost:9200',],
+        'INDEX_NAME': 'questions',
+    }
+}
+
+
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
@@ -86,11 +98,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     'arcutils',
+    'elasticmodels',
+    'iq',
     'iq.categories',
     'iq.categories.templatetags',
     'iq.questions',
     'iq.tags',
-    'iq.permissions',
     'iq.utils',
 )
 
@@ -161,3 +174,6 @@ TEMPLATE_DIRS = (
 )
 
 SECRET_KEY = variable("SECRET_KEY", default=os.urandom(64).decode("latin1"))
+
+if 'test' in sys.argv:
+    PASSWORD_HASHERS = ['django.contrib.auth.hashers.MD5PasswordHasher']

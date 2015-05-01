@@ -1,11 +1,12 @@
-import sys, os
+import sys
+import os
 from .settings import LDAP_DISABLED
 from arcutils import ldap
 from djangocas.backends import CASBackend
 from django.contrib.auth.models import User, Group
 from django.conf import settings as SETTINGS
 from django.core.exceptions import PermissionDenied
-from .permissions import LOGIN_GROUPS
+from iq import LOGIN_GROUPS
 
 
 class PSUBackend(CASBackend):
